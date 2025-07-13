@@ -20,7 +20,6 @@ import Seminars from "../pages/client/Seminars";
 import Conferences from "../pages/client/Conferences";
 import SeminarDetail from "../pages/client/SeminarDetail";
 import SummerSchool from "../pages/client/SummerSchool";
-import Courses from "../pages/client/Courses";
 import ResearchResults from "../pages/client/ResearchResults";
 import AppealToRector from "../pages/client/AppealToRector";
 import Connection from "../pages/client/Connection";
@@ -131,10 +130,6 @@ const ROUTES: RouteObject[] = [
           {
             path: "yay-mektebi",
             element: <SummerSchool />,
-          },
-          {
-            path: "kurslar",
-            element: <Courses />,
           },
           {
             path: "tedqiqat-neticeleri",

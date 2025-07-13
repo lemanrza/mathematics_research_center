@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const Seminars: React.FC = () => {
   const seminars = [
@@ -36,13 +37,17 @@ const Seminars: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h1 className="text-3xl font-bold text-[#0D1F4F] mb-12 ">
+      <h1 className="text-3xl font-bold text-[#0D1F4F] mb-12">
         SEMİNARLAR
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {seminars.map((seminar) => (
-          <div key={seminar.id} className="relative h-28 flex items-center p-4">
+          <Link
+            to={`/elmi-fealiyyet/seminarlar/${seminar.id}`} 
+            key={seminar.id}
+            className="relative h-28 flex items-center p-4"
+          >
             <div className="w-full h-[120px] bg-[#F3F3F4] rounded-md flex items-center justify-center text-[#0D1F4F] font-sans text-md text-center px-4">
               {seminar.title}
             </div>
@@ -50,7 +55,7 @@ const Seminars: React.FC = () => {
             <div
               className={`absolute -left-8 top-1/2 transform -translate-y-1/2 w-[120px] h-[120px] rounded-full border-20 border-white ${seminar.color} shadow-md`}
             ></div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

@@ -1,8 +1,8 @@
 const Welcome = () => {
   return (
     <div className="min-h-screen flex flex-col justify-center bg-gray-50 text-gray-800 py-12 px-6 sm:px-8">
-      <div className="max-w-3xl mx-auto text-center animate__animated animate__fadeIn animate__delay-1s">
-        <h2 className="text-4xl font-bold mb-6 text-gray-900 transition-transform transform hover:scale-105">
+      <div className="max-w-8xl mx-auto ">
+        <h2 className="text-4xl font-bold mb-10 text-gray-900">
           Xoş gəlmisiniz
         </h2>
         <p className="text-lg mb-4 leading-relaxed transition-opacity opacity-90 hover:opacity-100">

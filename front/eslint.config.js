@@ -12,6 +12,7 @@ export default tseslint.config([
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
+      erasableSyntaxOnly.configs.recommended, 
       reactHooks.configs['recommended-latest'],
       reactRefresh.configs.vite,
     ],

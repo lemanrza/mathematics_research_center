@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import { toast } from "sonner"
 import * as Yup from 'yup';
 
 const ContactForm = () => {
@@ -33,6 +34,7 @@ const ContactForm = () => {
         .min(10, 'Müraciət ən azı 10 simvoldan ibarət olmalıdır'),
     }),
     onSubmit: (_, { resetForm }) => {
+      toast("Müraciətiniz qeydə alındı")
       resetForm()
     },
   });
