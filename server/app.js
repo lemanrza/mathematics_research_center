@@ -4,6 +4,7 @@ const helmet = require("helmet")
 const rateLimit = require("express-rate-limit")
 const advertisementRouter = require("./src/routes/AdvertisementRoute")
 const newsRouter = require("./src/routes/NewsRoute")
+const userRouter = require("./src/routes/AuthRoute")
 
 
 const app = express()
@@ -22,6 +23,7 @@ app.use(limiter)
 app.use(helmet())
 app.use("/advertisements", advertisementRouter)
 app.use("/news", newsRouter)
+app.use("/auth", userRouter )
 
 
 
