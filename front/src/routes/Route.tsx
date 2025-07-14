@@ -10,7 +10,6 @@ import Welcome from "../pages/client/Welcome";
 import CenterMission from "../pages/client/CenterMission";
 import SceintificAdvisory from "../pages/client/SceintificAdvisory";
 import Colleagues from "../pages/client/Colleagues";
-import ColleaguesDetail from "../pages/client/ColleaguesDetail";
 import Visitors from "../pages/client/Visitors";
 import Appeal from "../pages/client/Appeal";
 import ResearchGroup from "../pages/client/ResearchGroup";
@@ -28,13 +27,16 @@ import Dashboard from "../pages/admin/Dashboard";
 import AuthLayout from "../layout/AuthLayout";
 import AdminLayout from "../layout/AdminLayout";
 import type { ReactNode } from "react";
+import ColleaguesErtan from "@/pages/client/ColleaguesErtan";
+import ColleaguesTurker from "@/pages/client/ColleaguesTurker";
+import ColleaguesOlcay from "@/pages/client/ColleaguesOlcay";
 
 interface ProtectedRouteProps {
   children: ReactNode;
 }
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const admin = localStorage.getItem("admin");
+  const admin = localStorage.getItem("token");
   if (!admin) {
     return <Navigate to="/admin/login" replace />;
   }
@@ -87,8 +89,16 @@ const ROUTES: RouteObject[] = [
             element: <Colleagues />,
           },
           {
-            path: "emekdaslar/:id",
-            element: <ColleaguesDetail />,
+            path: "emekdaslar/olcay-coskun",
+            element: <ColleaguesOlcay />,
+          },
+          {
+            path: "emekdaslar/turker-biyikoglu",
+            element: <ColleaguesTurker />,
+          },
+          {
+            path: "emekdaslar/ertan-elma",
+            element: <ColleaguesErtan />,
           },
           {
             path: "ziyaretciler",
@@ -151,14 +161,14 @@ const ROUTES: RouteObject[] = [
   // admin layout
   {
     element: <AdminLayout />,
-    path: "/admin/",
+    path: "/admin",
     children: [
       {
         index: true,
         element: (
-          // <ProtectedRoute>
-          <Dashboard />
-          // </ProtectedRoute> 
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
         ),
       },
     ],

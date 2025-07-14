@@ -42,6 +42,7 @@ export const post = async <T, D>(
   }
 };
 
+
 export const patch = async <T, D>(
   endpoint: string,
   id: string | number,

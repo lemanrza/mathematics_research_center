@@ -1,27 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { post } from "@/services/commonRequest";
 
-const AdminLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+const AdminLogin: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email || !password) {
-      setErrorMessage('Please fill in both fields.');
-    } else {
-      console.log('Login submitted with:', email, password);
-      setEmail('');
-      setPassword('');
+      setErrorMessage("Please fill in both fields.");
+      return;
+    }
+
+    const loginData = { email, password };
+    interface LoginResponse {
+      token: string;
+    }
+    try {
+      const response = await post<LoginResponse, typeof loginData>(
+        "/auth/login", 
+        loginData
+      );
+      if (response.token) {
+        localStorage.setItem("token", response.token);
+
+        navigate("/admin");
+      } else {
+        setErrorMessage("Invalid credentials, please try again.");
+      }
+    } catch (error) {
+      setErrorMessage("An error occurred. Please try again later.");
+      console.error("Login error:", error);
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-200 to-indigo-500 flex items-center justify-center">
       <div className="bg-white p-10 rounded-lg shadow-xl w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">Admin Panel</h2>
-        <p className="text-center text-gray-600 mb-6">Elan və ya xəbərləri idarə etmək üçün hesabınıza daxil olun</p>
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
+          Admin Panel
+        </h2>
+        <p className="text-center text-gray-600 mb-6">
+          Elan və ya xəbərləri idarə etmək üçün hesabınıza daxil olun
+        </p>
 
         {errorMessage && (
           <div className="text-red-500 text-sm mb-4 text-center">
@@ -31,7 +57,12 @@ const AdminLogin = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-600 mb-2">Email</label>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-600 mb-2"
+            >
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -45,7 +76,12 @@ const AdminLogin = () => {
           </div>
 
           <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-600 mb-2">Şifrə</label>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-600 mb-2"
+            >
+              Şifrə
+            </label>
             <input
               type="password"
               id="password"
