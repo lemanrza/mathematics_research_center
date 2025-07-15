@@ -12,15 +12,10 @@ const formatMongoData = require("../utils/formatMongoData");
 exports.getAdvertisements = async (req, res, next) => {
   try {
     const {
-      page = 1,
-      limit = 10,
       search = "",
       sortBy = "createdAt",
       order = "desc",
     } = req.query;
-
-    const pageNumber = parseInt(page, 10);
-    const pageSize = parseInt(limit, 10);
 
     const allowedSortFields = ["title", "createdAt"];
     const safeSortBy = allowedSortFields.includes(sortBy) ? sortBy : "createdAt";
@@ -32,25 +27,19 @@ exports.getAdvertisements = async (req, res, next) => {
     }
 
     const ads = await getAll({
-      page: pageNumber,
-      limit: pageSize,
       sortBy: safeSortBy,
       order: sortOrder,
       filter,
     });
 
-    const total = await getTotalCount(filter);
-
     res.status(200).json({
-      total,
-      pageSize: ads.length,
-      page: pageNumber,
       advertisements: formatMongoData(ads),
     });
   } catch (error) {
     next(error);
   }
 };
+
 
 // GET advertisement by ID
 exports.getAdvertisementById = async (req, res, next) => {
