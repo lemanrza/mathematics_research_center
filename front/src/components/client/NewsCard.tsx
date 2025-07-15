@@ -21,7 +21,7 @@ const SeminarCard: React.FC<News> = ({
         return { day, month, time };
     };
 
-    const { day, month, time } = formatDate(createdAt);
+    const { day, month, time } = formatDate(createdAt ? createdAt : Date.now());
 
     return (
         <Link to={`/xeberler/${id}`} className="group max-w-md">
@@ -36,7 +36,6 @@ const SeminarCard: React.FC<News> = ({
                     </div>
                 </div>
                 <div className="p-4 flex">
-                    {/* Date section */}
                     <div className="flex-shrink-0 text-center mr-4">
                         <div className="text-3xl font-bold text-[#0D1F4F] leading-none">
                             {day}
@@ -48,10 +47,8 @@ const SeminarCard: React.FC<News> = ({
                             {time}
                         </div>
                     </div>
-
-                    {/* Description */}
                     <div className="flex-1">
-                        <p className="text-sm text-gray-600 leading-relaxed uppercase tracking-wide">
+                        <p className="text-sm text-gray-600 leading-relaxed line-clamp-3 tracking-wide">
                             {title}
                         </p>
                     </div>

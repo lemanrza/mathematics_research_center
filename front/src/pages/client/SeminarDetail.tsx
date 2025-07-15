@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 
@@ -218,6 +219,7 @@ const SeminarDetail: React.FC = () => {
     }
   ];
 
+
   const seminar = seminars.find((seminar) => seminar.id.toString() == id);
 
   if (!seminar) {
@@ -227,22 +229,30 @@ const SeminarDetail: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <h1 className="text-3xl font-bold text-[#0D1F4F] mb-6">
-        {seminar.title}
+        {t(seminar.title)}
       </h1>
 
       {seminar.data.map((event, index) => (
         <div key={index} className="bg-[#F3F3F4] p-6 rounded-md mb-6">
           <h2 className="text-2xl font-semibold text-[#4A4A4A]">{event.speaker}</h2>
-          <p className="text-lg text-[#333] font-medium mt-2"><span>Tarix və saat:</span> {event.date} | {event.time}</p>
-          {event.location && <p className="text-sm text-[#7D7D7D] mt-2"><span className='font-semibold'>Məkan:</span> {event.location}</p>}
-          <p className="text-gray-800 mt-4"><span className='font-semibold'>Xülasə:</span> {event.summary}</p>
+          <p className="text-lg text-[#333] font-medium mt-2">
+            <span>{t('seminar_detail.date_time')}:</span> {event.date} | {event.time}
+          </p>
+          {event.location && (
+            <p className="text-sm text-[#7D7D7D] mt-2">
+              <span className="font-semibold">{t('seminar_detail.location')}:</span> {event.location}
+            </p>
+          )}
+          <p className="text-gray-800 mt-4">
+            <span className="font-semibold">{t('seminar_detail.summary')}:</span> {t(event.summary)}
+          </p>
         </div>
       ))}
       <Link
-        to="/elmi-fealiyyet/seminarlar"  
+        to="/elmi-fealiyyet/seminarlar"
         className="inline-block mt-6 px-6 py-2 bg-[#0D1F4F] text-white font-semibold text-lg rounded-md hover:bg-[#4A90E2]"
       >
-        Bütün Seminarlar
+        {t('seminar_detail.all_seminars')}
       </Link>
     </div>
   );

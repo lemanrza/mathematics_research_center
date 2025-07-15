@@ -1,10 +1,14 @@
+import type { ReactNode } from "react";
 import { Navigate, type RouteObject } from "react-router-dom";
 import Home from "../pages/client/Home";
 import News from "../pages/client/News";
 import Advertisements from "../pages/client/Advertisements";
 import NewsDetail from "../pages/client/NewsDetail";
 import AdvertisementDetail from "../pages/client/AdvertisementDetail";
-
+import ColleaguesErtan from "@/pages/client/ColleaguesErtan";
+import ColleaguesTurker from "@/pages/client/ColleaguesTurker";
+import ColleaguesOlcay from "@/pages/client/ColleaguesOlcay";
+import NotFound from "@/pages/client/NotFound";
 import ClientLayout from "../layout/ClientLayout";
 import Welcome from "../pages/client/Welcome";
 import CenterMission from "../pages/client/CenterMission";
@@ -26,10 +30,7 @@ import AdminLogin from "../pages/admin/AdminLogin";
 import Dashboard from "../pages/admin/Dashboard";
 import AuthLayout from "../layout/AuthLayout";
 import AdminLayout from "../layout/AdminLayout";
-import type { ReactNode } from "react";
-import ColleaguesErtan from "@/pages/client/ColleaguesErtan";
-import ColleaguesTurker from "@/pages/client/ColleaguesTurker";
-import ColleaguesOlcay from "@/pages/client/ColleaguesOlcay";
+
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -155,7 +156,12 @@ const ROUTES: RouteObject[] = [
         path: "elaqe",
         element: <Connection />,
       },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
     ],
+
   },
 
   // admin layout

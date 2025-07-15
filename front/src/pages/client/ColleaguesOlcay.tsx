@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import React from "react";
 
 interface SectionProps {
@@ -10,7 +11,7 @@ const OlcayCoskunProfile: React.FC = () => {
     <div className="p-6 md:p-12 max-w-8xl mx-auto text-sm leading-relaxed text-gray-800">
       <h1 className="text-3xl font-bold text-[#0D1F4F] mb-2">OLCAY COŞKUN</h1>
       <p className="mb-4 text-[15px] text-gray-700">
-        DRL-in direktoru, Cəbr Tədqiqat Qrupu - Baş Tədqiqatçı
+        {t("DRL-in direktoru, Cəbr Tədqiqat Qrupu - Baş Tədqiqatçı")}
       </p>
       <p className="mb-6 text-gray-700">
         Tədqiqat maraqlarıma <strong>sonlu qrupların təsvir nəzəriyyəsi</strong>, Mackey funktorları, (lifli) biset funktorları, kateqoriya cəbrləri, "Green Biset" funktorları, blok nəzəriyyəsi, birləşmə sistemləri, homoloji cəbr daxildir.

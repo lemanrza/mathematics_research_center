@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -37,7 +38,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({
                     <span className="font-bold text-gray-800">E-mail:</span> {email}
                 </p>
                 <p>
-                    <span className="font-bold text-gray-800">Tədqiqat maraqları:</span>{' '}
+                    <span className="font-bold text-gray-800">{t("Tədqiqat maraqları:")}</span>{' '}
                     <span className="text-gray-600">{researchInterests}</span>
                 </p>
             </div>

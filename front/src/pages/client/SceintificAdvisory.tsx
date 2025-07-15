@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 
 const councilMembers = [
   {
@@ -22,13 +23,14 @@ const councilMembers = [
   },
 ];
 
-const SceintificAdvisory = () => {
+const ScientificAdvisory = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="p-10 bg-white text-gray-800">
-
       {/* Subtitle */}
       <h2 className="text-2xl font-bold mb-6 text-[#0D1F4F]">
-        Elmi Məsləhət Şurası
+        {t('scientific_advisory.title')}
       </h2>
 
       {/* Grid Layout */}
@@ -41,7 +43,9 @@ const SceintificAdvisory = () => {
             <p className="text-lg font-semibold text-gray-600">
               {member.name}
             </p>
-            <p className="mt-1 text-[#0D1F4F]">{member.title}</p>
+            <p className="mt-1 text-[#0D1F4F]">
+              {member.title}
+            </p>
           </div>
         ))}
       </div>
@@ -49,5 +53,4 @@ const SceintificAdvisory = () => {
   );
 };
 
-
-export default SceintificAdvisory
+export default ScientificAdvisory;

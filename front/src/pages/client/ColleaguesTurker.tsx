@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import React from "react";
 
 interface SectionProps {
@@ -10,19 +11,19 @@ const TurkerBiyikogluProfile: React.FC = () => {
     <div className="p-6 md:p-12 max-w-8xl mx-auto text-sm leading-relaxed text-gray-800">
       <h1 className="text-3xl font-bold text-[#0D1F4F] mb-2">TÜRKER BIYIKOĞLU</h1>
       <p className="mb-4 text-[15px] text-gray-700">
-        Qraf Nəzəriyyəsi Və Onun Tətbiqləri Qrupu - Baş Elmi Işçi
+        {t("Qraf Nəzəriyyəsi Və Onun Tətbiqləri Qrupu - Baş Elmi Işçi")}
       </p>
       <p className="mb-6 text-gray-700">
         Tədqiqat maraqlarıma <strong>Qraf Nəzəriyyəsi</strong>, Qraf Modelləşdirmə və Qraf Tətbiqləri daxildir.
       </p>
 
-      <Section
-        title="Qısa məlumat"
+     <Section
+        title={t("Qısa məlumat")}
         items={[
-          "2000-ci ildə TU Grazdan (Avstriya) Gerhard J Woegingerin rəhbərliyi altında riyaziyyat üzrə bakalavr və magistratura diplom dərəcəsini və 2003-cü ildə Vyana Universitetində (Avstriya) Peter F. Stadler və Josef Leydoldun rəhbərliyi altında doktorantura dərəcəsini almışam.",
-          "Mən Leypsiqdəki (Almaniya) Maks Plank adına Riyaziyyat İnstitutunda iki il, Katolik de Louvain Universitetinin (Belçika) Riyaziyyat Mühəndisliyi Departamentində bir il doktoranturadan sonra elmi işçi kimi fəaliyyət göstərmişəm.",
-          "İstanbulda İşık Universitetinin Riyaziyyat kafedrasında və İzmirdə İzmir Texnologiya İnstitutunun Riyaziyyat kafedrasında altı ildən çox dosent vəzifəsində çalışmışam.",
-          "Son yeddi il Ankarada iki startap şirkətində baş elmi işçi kimi fəaliyyət göstərmişəm."
+          t("2000-ci ildə TU Grazdan (Avstriya) Gerhard J Woegingerin rəhbərliyi altında riyaziyyat üzrə bakalavr və magistratura diplom dərəcəsini və 2003-cü ildə Vyana Universitetində (Avstriya) Peter F. Stadler və Josef Leydoldun rəhbərliyi altında doktorantura dərəcəsini almışam."),
+          t("Mən Leypsiqdəki (Almaniya) Maks Plank adına Riyaziyyat İnstitutunda iki il, Katolik de Louvain Universitetinin (Belçika) Riyaziyyat Mühəndisliyi Departamentində bir il doktoranturadan sonra elmi işçi kimi fəaliyyət göstərmişəm."),
+          t("İstanbulda İşık Universitetinin Riyaziyyat kafedrasında və İzmirdə İzmir Texnologiya İnstitutunun Riyaziyyat kafedrasında altı ildən çox dosent vəzifəsində çalışmışam."),
+          t("Son yeddi il Ankarada iki startap şirkətində baş elmi işçi kimi fəaliyyət göstərmişəm.")
         ]}
       />
 

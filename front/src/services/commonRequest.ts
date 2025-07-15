@@ -43,13 +43,13 @@ export const post = async <T, D>(
 };
 
 
-export const patch = async <T, D>(
+export const put = async <T, D>(
   endpoint: string,
   id: string | number,
   data: D
 ): ApiResponse<T> => {
   try {
-    const response: AxiosResponse<T> = await instance.patch(
+    const response: AxiosResponse<T> = await instance.put(
       `${endpoint}/${id}`,
       data
     );

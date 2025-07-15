@@ -1,7 +1,7 @@
 export type Advertisement = {
-  id: string;
+  id?: string;
   title: string;
   coverImage: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: number;
+  updatedAt?: string;
 };

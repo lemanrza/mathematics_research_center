@@ -1,8 +1,11 @@
 import { useFormik } from 'formik';
 import { toast } from "sonner"
 import * as Yup from 'yup';
+import { useTranslation } from "react-i18next";
 
 const ContactForm = () => {
+  const { t } = useTranslation();
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -15,26 +18,26 @@ const ContactForm = () => {
     },
     validationSchema: Yup.object({
       name: Yup.string()
-        .required('Ad və Soyad tələb olunur')
-        .min(3, 'Ad və Soyad ən azı 3 simvoldan ibarət olmalıdır'),
-      fatherName: Yup.string().required('Atanızın adı tələb olunur'),
-      faculty: Yup.string().required('Fakültə tələb olunur'),
+        .required(t('Ad və Soyad tələb olunur'))
+        .min(3, t('Ad və Soyad ən azı 3 simvoldan ibarət olmalıdır')),
+      fatherName: Yup.string().required(t('Atanızın adı tələb olunur')),
+      faculty: Yup.string().required(t('Fakültə tələb olunur')),
       email: Yup.string()
-        .email('Email düzgün deyil')
-        .required('Email tələb olunur'),
+        .email(t('Email düzgün deyil'))
+        .required(t('Email tələb olunur')),
       phone: Yup.string()
-        .required('Telefon nömrəsi tələb olunur')
+        .required(t('Telefon nömrəsi tələb olunur'))
         .matches(
           /^[0-9]+$/,
-          'Telefon nömrəsi yalnız rəqəmlərdən ibarət olmalıdır'
+          t('Telefon nömrəsi yalnız rəqəmlərdən ibarət olmalıdır')
         ),
-      subject: Yup.string().required('Mövzu seçilməlidir'),
+      subject: Yup.string().required(t('Mövzu seçilməlidir')),
       message: Yup.string()
-        .required('Müraciət yazılmalıdır')
-        .min(10, 'Müraciət ən azı 10 simvoldan ibarət olmalıdır'),
+        .required(t('Müraciət yazılmalıdır'))
+        .min(10, t('Müraciət ən azı 10 simvoldan ibarət olmalıdır')),
     }),
     onSubmit: (_, { resetForm }) => {
-      toast("Müraciətiniz qeydə alındı")
+      toast(t("Müraciətiniz qeydə alındı"))
       resetForm()
     },
   });
@@ -42,16 +45,16 @@ const ContactForm = () => {
   return (
     <div className="bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
       <div className="bg-white p-8 rounded-lg max-w-3xl mx-auto shadow-lg">
-        <h1 className="text-3xl font-semibold text-[#0D1F4F] mb-4">Rektora Müraciət</h1>
+        <h1 className="text-3xl font-semibold text-[#0D1F4F] mb-4">{t('Rektora Müraciət')}</h1>
         <p className="text-[#3b4a7f] text-sm mb-8 leading-relaxed">
-          Hörmətli Tələbələr, əgər Rektora hər hansı bir sualınız varsa, müraciətinizi təqdim edə bilərsiniz.
-          Xahiş olunur, müraciət formasındakı bütün tələb olunan sahələrin tam olaraq doldurulmasını və mətnlərinizi aydın şəkildə ifadə etməyinizi təmin edin.
+          {t('Hörmətli Tələbələr, əgər Rektora hər hansı bir sualınız varsa, müraciətinizi təqdim edə bilərsiniz.')}
+          {t('Xahiş olunur, müraciət formasındakı bütün tələb olunan sahələrin tam olaraq doldurulmasını və mətnlərinizi aydın şəkildə ifadə etməyinizi təmin edin.')}
         </p>
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-[#0D1F4F]" htmlFor="name">
-                Ad & Soyad
+                {t('Ad & Soyad')}
               </label>
               <input
                 type="text"
@@ -68,7 +71,7 @@ const ContactForm = () => {
             </div>
             <div>
               <label className="block text-sm font-medium text-[#0D1F4F]" htmlFor="fatherName">
-                Atanızın adı
+                {t('Atanızın adı')}
               </label>
               <input
                 type="text"
@@ -85,7 +88,7 @@ const ContactForm = () => {
             </div>
             <div>
               <label className="block text-sm font-medium text-[#0D1F4F]" htmlFor="faculty">
-                Fakültə
+                {t('Fakültə')}
               </label>
               <input
                 type="text"
@@ -102,7 +105,7 @@ const ContactForm = () => {
             </div>
             <div>
               <label className="block text-sm font-medium text-[#0D1F4F]" htmlFor="email">
-                Email
+                {t('Email')}
               </label>
               <input
                 type="email"
@@ -119,7 +122,7 @@ const ContactForm = () => {
             </div>
             <div>
               <label className="block text-sm font-medium text-[#0D1F4F]" htmlFor="phone">
-                Nömrə
+                {t('Telefon nömrəsi')}
               </label>
               <input
                 type="text"
@@ -136,7 +139,7 @@ const ContactForm = () => {
             </div>
             <div>
               <label className="block text-sm font-medium text-[#0D1F4F]" htmlFor="subject">
-                Mövzu
+                {t('Mövzu')}
               </label>
               <select
                 id="subject"
@@ -146,11 +149,11 @@ const ContactForm = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               >
-                <option selected hidden>Seçin</option>
-                <option value="question">Sual</option>
-                <option value="complaint">Şikayət</option>
-                <option value="suggestion">Təklif</option>
-                <option value="request">Ərizə</option>
+                <option selected hidden>{t('Seçin')}</option>
+                <option value="question">{t('Sual')}</option>
+                <option value="complaint">{t('Şikayət')}</option>
+                <option value="suggestion">{t('Təklif')}</option>
+                <option value="request">{t('Ərizə')}</option>
               </select>
               {formik.touched.subject && formik.errors.subject ? (
                 <div className="text-red-600 text-xs mt-2">{formik.errors.subject}</div>
@@ -160,7 +163,7 @@ const ContactForm = () => {
 
           <div>
             <label className="block text-sm font-medium text-[#0D1F4F]" htmlFor="message">
-              Müraciətiniz
+              {t('Müraciətiniz')}
             </label>
             <textarea
               id="message"
@@ -182,7 +185,7 @@ const ContactForm = () => {
               type="submit"
               className="py-3 px-6 bg-[#0D1F4F] text-white rounded-lg hover:bg-[#1a3154] transition duration-300"
             >
-              Göndər
+              {t('Göndər')}
             </button>
           </div>
         </form>
