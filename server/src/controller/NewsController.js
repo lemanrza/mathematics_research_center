@@ -4,7 +4,6 @@ const {
   post,
   deleteOne,
   updateOne,
-  getTotalCount,
 } = require("../services/newsService");
 const formatMongoData = require("../utils/formatMongoData");
 
@@ -21,14 +20,7 @@ exports.getNews = async (req, res, next) => {
     }
 
     const news = await getAll()
-      .then(items => items
-        .filter(item => item.title.toLowerCase().includes(search.toLowerCase()))
-        .sort((a, b) =>
-          sortOrder === 1
-            ? a[sortBy] > b[sortBy] ? 1 : -1
-            : a[sortBy] < b[sortBy] ? 1 : -1
-        )
-      );
+      .then(items => items);
 
     res.status(200).json({
       news: formatMongoData(news),

@@ -2,13 +2,16 @@ const mongoose = require("mongoose");
 
 const advertisementSchema = new mongoose.Schema({
     title: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    titleInEng: {
-        type: String,
-        trim: true,
+        az: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        en: {
+            type: String,
+            required: true,
+            trim: true
+        }
     },
     coverImage: {
         type: String,
