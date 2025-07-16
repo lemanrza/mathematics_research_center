@@ -1,7 +1,9 @@
 export type News = {
   id?: string;
-  title: string;
-  coverImage: string;
+  title: {
+    az: string,
+    en: string
+  };  coverImage: string;
   createdAt?: number;
   updatedAt?: string;
 };

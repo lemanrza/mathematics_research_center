@@ -6,9 +6,9 @@ import { Endpoints } from '@/enums/endpoints';
 import { getAll } from '@/services/commonRequest';
 import type { News } from '@/types/newsType';
 import { format } from 'date-fns';
-import { t } from 'i18next';
 import { CalendarIcon, Search } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const SeminarList: React.FC = () => {
   const [news, setNews] = useState<News[]>([]);
@@ -18,6 +18,7 @@ const SeminarList: React.FC = () => {
   const [visibleSeminars, setVisibleSeminars] = useState<News[]>([]);
   const [showMore, setShowMore] = useState<boolean>(false);
   const [noNewsOnSelectedDate, setNoNewsOnSelectedDate] = useState<boolean>(false);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     getAll<{ news: News[] }>(Endpoints.news).then((resp) => {
@@ -31,7 +32,7 @@ const SeminarList: React.FC = () => {
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     const filtered = news.filter((seminar) =>
-      seminar.title.toLowerCase().includes(query.toLowerCase())
+      seminar.title[i18n.language as keyof typeof seminar.title]?.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredNews(filtered);
     setVisibleSeminars(filtered.slice(0, 8));

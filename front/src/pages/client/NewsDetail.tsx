@@ -6,12 +6,14 @@ import { Endpoints } from '@/enums/endpoints';
 import { getAll, getOne } from '@/services/commonRequest';
 import { ArrowLeft } from 'lucide-react';
 import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 const NewsDetail: React.FC = () => {
   const [news, setNews] = useState<News | null>(null);
   const [allNews, setAllNews] = useState<News[]>([]);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { i18n } = useTranslation();  // Access current language from i18n
 
   useEffect(() => {
     if (id) {
@@ -34,10 +36,12 @@ const NewsDetail: React.FC = () => {
         console.error('Error fetching all news:', error);
       });
   }, []);
+
   const months = [
-    "Yanvar", "Fevral", "Mart", "Aprel", "May", "İyun", "İyul", "Avqust",
-    "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"
+    'Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'İyun', 'İyul', 'Avqust',
+    'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr',
   ];
+
   const formatDate = (timestamp: number) => {
     const date = new Date(timestamp);
     const day = String(date.getDate()).padStart(2, '0');
@@ -48,12 +52,15 @@ const NewsDetail: React.FC = () => {
   };
 
   const handleNavigateToNews = (id: string) => {
-    navigate(`/xeberler/${id}`); // Navigate to the selected news item
+    navigate(`/xeberler/${id}`);  // Navigate to the selected news item
   };
 
   if (!news) {
     return <div>Loading...</div>;
   }
+
+  // Access the title based on the current language (az or en)
+  const title = news.title[i18n.language as keyof typeof news.title];
 
   return (
     <>
@@ -70,7 +77,7 @@ const NewsDetail: React.FC = () => {
         <div className="w-full sm:w-3/4 md:w-2/3">
           {/* News Title Section */}
           <div className="justify-between items-center mb-6">
-            <h1 className="text-4xl font-semibold text-gray-800">{news.title}</h1>
+            <h1 className="text-4xl font-semibold text-gray-800">{title}</h1>
             <div className="text-lg mt-2 text-gray-500">{formatDate(news.createdAt ? news.createdAt : Date.now())}</div>
           </div>
 
@@ -78,7 +85,7 @@ const NewsDetail: React.FC = () => {
           <div className="mb-6">
             <img
               src={news.coverImage}
-              alt={news.title}
+              alt={title}
               className="w-120 h-110 rounded-lg"
             />
           </div>
@@ -96,7 +103,7 @@ const NewsDetail: React.FC = () => {
                 className="border-b pb-4 cursor-pointer hover:bg-gray-100 p-2 transition-all"
                 onClick={() => item.id && handleNavigateToNews(item.id)}
               >
-                <h3 className="font-semibold text-gray-700">{item.title}</h3>
+                <h3 className="font-semibold text-gray-700">{item.title[i18n.language as keyof typeof item.title]}</h3>
                 <p className="text-sm text-gray-500">{formatDate(item.createdAt ? item.createdAt : Date.now())}</p>
               </div>
             ))}
@@ -104,7 +111,6 @@ const NewsDetail: React.FC = () => {
         </div>
       </div>
     </>
-
   );
 };
 

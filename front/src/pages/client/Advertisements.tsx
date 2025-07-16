@@ -3,12 +3,12 @@ import { CalendarIcon, Search } from 'lucide-react';
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import type { Advertisement } from '@/types/advertisementType';
+import type { Advertisement } from '@/types/advertisementType';  // Ensure this type is correct
 import { getAll } from '@/services/commonRequest';
 import { Endpoints } from '@/enums/endpoints';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 const AnnouncementsSection: React.FC = () => {
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
@@ -18,7 +18,7 @@ const AnnouncementsSection: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [showMore, setShowMore] = useState<boolean>(false);
   const [noNewsOnSelectedDate, setNoNewsOnSelectedDate] = useState<boolean>(false);
-
+  const { t, i18n } = useTranslation();  // Get the current language from i18n
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const AnnouncementsSection: React.FC = () => {
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     const filtered = advertisements.filter((seminar) =>
-      seminar.title.toLowerCase().includes(query.toLowerCase())
+      seminar.title[i18n.language as keyof typeof seminar.title]?.toLowerCase().includes(query.toLowerCase()) // Safe type assertion
     );
     setFilteredAdvertisements(filtered);
     setVisibleSeminars(filtered.slice(0, 8));
@@ -125,7 +125,6 @@ const AnnouncementsSection: React.FC = () => {
         </div>
       </div>
 
-
       <div className="mb-8">
         <Button onClick={handleResetFilters} className="bg-[#0D1F4F] uppercase text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
           {t("butun_elanlar")}
@@ -149,7 +148,7 @@ const AnnouncementsSection: React.FC = () => {
             <PopoverContent className="w-auto p-0">
               <Calendar
                 mode="single"
-                selected={date ?? undefined} 
+                selected={date ?? undefined}
                 onSelect={handleDateChange}
               />
             </PopoverContent>
@@ -183,7 +182,7 @@ const AnnouncementsSection: React.FC = () => {
               <div className="flex-1 p-4 flex flex-col justify-between">
                 <div>
                   <p className="text-sm font-semibold text-gray-600 mb-2 line-clamp-3 hover:text-gray-900 hover:underline leading-relaxed">
-                    {announcement.title}
+                    {announcement.title[i18n.language as keyof typeof announcement.title]} {/* Safe indexing */}
                   </p>
                 </div>
 
@@ -206,7 +205,7 @@ const AnnouncementsSection: React.FC = () => {
             onClick={loadMoreSeminars}
             className="bg-[#0D1F4F] text-white px-8 py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-200"
           >
-           {t("daha_cox_yukle")}
+            {t("daha_cox_yukle")}
           </button>
         </div>
       )}

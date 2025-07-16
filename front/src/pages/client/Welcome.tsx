@@ -1,6 +1,7 @@
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const Welcome = () => {
+  const { t } = useTranslation()
   return (
     <div className="min-h-screen flex flex-col justify-center bg-gray-50 text-gray-800 py-12 px-6 sm:px-8">
       <div className="max-w-8xl mx-auto ">

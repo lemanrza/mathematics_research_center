@@ -1,9 +1,10 @@
 import { Send } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
+  const { t } = useTranslation()
   return (
     <footer className="bg-gray-50 text-[#3b2d4a] pt-12">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 pb-10 border-b border-purple-200">

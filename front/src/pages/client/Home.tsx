@@ -1,25 +1,27 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Endpoints } from "@/enums/endpoints";
 import { getAll } from "@/services/commonRequest";
 import type { Advertisement } from "@/types/advertisementType";
 import type { News } from "@/types/newsType";
-import { t } from "i18next";
-import { ChevronLeft, ChevronRight, MousePointer } from "lucide-react"
+import { ChevronLeft, ChevronRight, MousePointer } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const [seminars, setSeminars] = useState<News[]>()
-  const [announcements, setAnnouncements] = useState<Advertisement[]>()
+  const { t, i18n } = useTranslation();
+  const [seminars, setSeminars] = useState<News[]>([]);
+  const [announcements, setAnnouncements] = useState<Advertisement[]>([]);
+
   useEffect(() => {
     getAll<{ news: [] }>(Endpoints.news).then((resp) => {
       setSeminars([...resp.news]);
     });
     getAll<{ advertisements: [] }>(Endpoints.advertisements).then((resp) => {
-      setAnnouncements([...resp.advertisements.reverse()])
-    })
-  }, [])
+      setAnnouncements([...resp.advertisements.reverse()]);
+    });
+  }, []);
 
   const months = [
     "Yanvar", "Fevral", "Mart", "Aprel", "May", "İyun", "İyul", "Avqust",
@@ -34,6 +36,7 @@ const Home = () => {
     const minutes = String(date.getMinutes()).padStart(2, '0');
     return `${day} ${month} ${hours}:${minutes}`;
   };
+
   const menuItems = [
     { label: "xos_gelmisiniz", link: "/haqqimizda/xos-gelmisiniz" },
     { label: "merkezin_missiyasi", link: "/haqqimizda/merkezin-missiyasi" },
@@ -76,7 +79,9 @@ const Home = () => {
               RESEARCH CENTER
             </h2>
             <div className="bg-black/20 backdrop-blur-sm px-4 py-2 rounded-lg inline-block">
-              <Link to={"/haqqimizda/merkezin-missiyasi"} className="text-lg flex gap-2 cursor-pointer items-center">{t("daha_cox")} <MousePointer /> </Link>
+              <Link to={"/haqqimizda/merkezin-missiyasi"} className="text-lg flex gap-2 cursor-pointer items-center">
+                {t("daha_cox")} <MousePointer />
+              </Link>
             </div>
           </div>
         </div>
@@ -102,8 +107,8 @@ const Home = () => {
           <div className="w-3 h-3 bg-white/50 rounded-full"></div>
         </div>
       </section>
-      <section className="flex gap-4 px-6 py-4 flex-wrap lg:flex-nowrap">
 
+      <section className="flex gap-4 px-6 py-4 flex-wrap lg:flex-nowrap">
         {/* sidebar */}
         <div className="w-full lg:w-80 space-y-1">
           {menuItems.map((item, index) => (
@@ -117,6 +122,7 @@ const Home = () => {
             </Card>
           ))}
         </div>
+
         {/* news */}
         <div className="flex-1 ">
           <Card className="border-0 shadow-lg">
@@ -134,17 +140,20 @@ const Home = () => {
                         <img
                           className="w-full h-full object-cover hover:scale-105 transition-transform transform"
                           src={seminar.coverImage}
-                          alt={seminar.title}
+                          alt={seminar.title[i18n.language as keyof typeof seminar.title]}  // Access the title based on current language
                         />
                       </div>
                       <CardContent className="py-2">
-                        <h3 className="text-xl font-bold text-gray-800 line-clamp-2">{seminar.title}</h3>
+                        <h3 className="text-xl font-bold text-gray-800 line-clamp-2">
+                          {seminar.title[i18n.language as keyof typeof seminar.title]}  {/* Dynamically access the title */}
+                        </h3>
                         <p className="text-sm text-gray-600 mb-2">
                           {formatDate(seminar.createdAt ? seminar.createdAt : Date.now())}
                         </p>
                       </CardContent>
                     </Link>
                   </Card>
+
                 ))}
               </div>
             </CardContent>
@@ -180,10 +189,9 @@ const Home = () => {
                         </div>
                       </div>
                       <p className="text-sm text-gray-700 mt-2 leading-relaxed">
-                        {announcement.title}
+                        {announcement.title[i18n.language as keyof typeof announcement.title]}
                       </p>
                     </Link>
-
                   </div>
                 ))}
               </div>
@@ -199,8 +207,7 @@ const Home = () => {
         </div>
       </section>
     </div>
+  );
+};
 
-  )
-}
-
-export default Home
+export default Home;

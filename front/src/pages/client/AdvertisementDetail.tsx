@@ -6,12 +6,14 @@ import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import type { Advertisement } from '@/types/advertisementType';
 import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 const AdvertisementDetail: React.FC = () => {
   const [advertisement, setAdvertisement] = useState<Advertisement | null>(null);
   const [allAdvertisements, setAllAdvertisements] = useState<Advertisement[]>([]);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     if (id) {
@@ -24,15 +26,17 @@ const AdvertisementDetail: React.FC = () => {
         });
     }
   }, [id]);
+
   useEffect(() => {
     getAll<{ advertisements: Advertisement[] }>(Endpoints.advertisements)
       .then((resp) => {
         setAllAdvertisements(resp.advertisements.reverse());
       })
       .catch((error) => {
-        console.error('Error fetching all news:', error);
+        console.error('Error fetching all advertisements:', error);
       });
   }, []);
+
   const months = [
     'Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'İyun', 'İyul', 'Avqust',
     'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr',
@@ -48,8 +52,11 @@ const AdvertisementDetail: React.FC = () => {
   };
 
   if (!advertisement) {
-    return <div>{t("yuklenir")}</div>;
+    return <div>{t("yuklenir")}</div>;  // Loading message in the correct language
   }
+
+  // Access title based on the current language (az or en)
+  const title = advertisement.title[i18n.language as keyof typeof advertisement.title];
 
   return (
     <>
@@ -66,7 +73,7 @@ const AdvertisementDetail: React.FC = () => {
         <div className="w-full sm:w-3/4 md:w-2/3">
           {/* Advertisement Title Section */}
           <div className="justify-between items-center mb-6">
-            <h1 className="text-4xl font-semibold text-gray-800">{advertisement.title}</h1>
+            <h1 className="text-4xl font-semibold text-gray-800">{title}</h1>
             <div className="text-lg mt-2 text-gray-500">{formatDate(advertisement.createdAt ? advertisement.createdAt : Date.now())}</div>
           </div>
 
@@ -74,7 +81,7 @@ const AdvertisementDetail: React.FC = () => {
           <div className="mb-6">
             <img
               src={advertisement.coverImage}
-              alt={advertisement.title}
+              alt={title}
               className="w-120 h-110 rounded-lg"
             />
           </div>
@@ -92,7 +99,7 @@ const AdvertisementDetail: React.FC = () => {
                 className="border-b pb-4 cursor-pointer hover:bg-gray-100 p-2 transition-all"
                 onClick={() => navigate(`/elanlar/${item.id}`)}
               >
-                <h3 className="font-semibold text-gray-700">{item.title}</h3>
+                <h3 className="font-semibold text-gray-700">{item.title[i18n.language as keyof typeof item.title]}</h3>
                 <p className="text-sm text-gray-500">{formatDate(item.createdAt ? item.createdAt : Date.now())}</p>
               </div>
             ))}

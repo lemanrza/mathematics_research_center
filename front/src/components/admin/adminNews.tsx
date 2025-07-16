@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { post, put, remove } from '@/services/commonRequest';
 import { Endpoints } from '@/enums/endpoints';
 import { formatDate } from '@/utils/formatDate';
+import { useTranslation } from 'react-i18next';
 
 interface AdminNewsProps {
     allNews: News[];
@@ -14,9 +15,14 @@ interface AdminNewsProps {
 }
 
 const AdminNews: React.FC<AdminNewsProps> = ({ allNews, setAllNews, searchNews, setSearchNews }) => {
+    const { i18n } = useTranslation();
+
     const [modalData, setModalData] = useState<News>({
         id: '',
-        title: '',
+        title: {
+            az: '',
+            en: ''
+        },
         coverImage: '',
         createdAt: Date.now(),
         updatedAt: Date.now().toString(),
@@ -27,7 +33,10 @@ const AdminNews: React.FC<AdminNewsProps> = ({ allNews, setAllNews, searchNews, 
     const handleAddNews = () => {
         setModalData({
             id: '',
-            title: '',
+            title: {
+                az: '',
+                en: ''
+            },
             coverImage: '',
             createdAt: Date.now(),
             updatedAt: Date.now().toString(),
@@ -80,7 +89,10 @@ const AdminNews: React.FC<AdminNewsProps> = ({ allNews, setAllNews, searchNews, 
             setIsModalOpen(false);
             setModalData({
                 id: '', // Reset to empty string
-                title: '',
+                title: {
+                    az: '',
+                    en: ''
+                },
                 coverImage: '',
                 createdAt: Date.now(),
                 updatedAt: Date.now().toString(),
@@ -90,7 +102,6 @@ const AdminNews: React.FC<AdminNewsProps> = ({ allNews, setAllNews, searchNews, 
         }
     };
 
-
     return (
         <>
             <Dialog open={isModalOpen} onOpenChange={() => setIsModalOpen(false)}>
@@ -98,14 +109,25 @@ const AdminNews: React.FC<AdminNewsProps> = ({ allNews, setAllNews, searchNews, 
                 <DialogContent>
                     <DialogTitle>{isEdit ? 'Dəyişdir' : 'Əlavə et'}</DialogTitle>
                     <form onSubmit={(e) => { e.preventDefault(); handleModalSubmit(); }}>
+                        {/* Azerbaijani Title Input */}
                         <input
                             type="text"
-                            placeholder="Başlıq"
-                            value={modalData.title}
-                            onChange={(e) => setModalData({ ...modalData, title: e.target.value })}
+                            placeholder="Başlıq (Azerbaijani)"
+                            value={modalData.title.az}
+                            onChange={(e) => setModalData({ ...modalData, title: { ...modalData.title, az: e.target.value } })}
                             className="w-full p-2 border border-gray-300 rounded-md mb-4"
                             required
                         />
+                        {/* English Title Input */}
+                        <input
+                            type="text"
+                            placeholder="Title (English)"
+                            value={modalData.title.en}
+                            onChange={(e) => setModalData({ ...modalData, title: { ...modalData.title, en: e.target.value } })}
+                            className="w-full p-2 border border-gray-300 rounded-md mb-4"
+                            required
+                        />
+                        {/* Cover Image Input */}
                         <input
                             type="url"
                             placeholder="Şəkil URL-i"
@@ -149,11 +171,14 @@ const AdminNews: React.FC<AdminNewsProps> = ({ allNews, setAllNews, searchNews, 
                     />
                 </div>
                 <div className="space-y-4">
-                    {allNews.filter(news => news.title.toLowerCase().includes(searchNews.toLowerCase())).map((news) => (
+                    {allNews.filter(news =>
+                        news.title.az.toLowerCase().includes(searchNews.toLowerCase()) ||
+                        news.title.en.toLowerCase().includes(searchNews.toLowerCase())
+                    ).map((news) => (
                         <div key={news.id} className="p-4 border border-gray-300 rounded-lg shadow-md hover:bg-gray-50 transition">
-                            <h4 className="font-semibold text-lg text-[#0D1F4F]">{news.title}</h4>
-                            <img src={news.coverImage} alt={news.title} className="w-24 h-24 object-cover rounded-md mt-2 mb-4" />
-                            <p className="text-gray-500 text-sm">Yaradılma tarixi:{formatDate(modalData.createdAt ? modalData.createdAt : Date.now())}</p>
+                            <h4 className="font-semibold text-lg text-[#0D1F4F]">Azərbaycanca: {news.title.az}</h4>
+                            <h4 className="font-semibold text-lg text-[#0D1F4F]">English: {news.title.en}</h4>
+                            <img src={news.coverImage} alt={news.title[i18n.language as keyof typeof news.title]} className="w-24 h-24 object-cover rounded-md mt-2 mb-4" />
                             <div className="mt-2">
                                 <button
                                     onClick={() => news.id && handleEditNews(news.id)}
