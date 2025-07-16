@@ -393,5 +393,6 @@
         "algebra_seminars": "Cəbr Seminarları",
         "cluster_algebras_summary": "Cluster algebras offer a unifying framework that connects a diverse range of mathematical areas, including representation theory, string theory, Poisson geometry, integrable systems, knot theory, and combinatorics. In this talk, we will give a gentle introduction to cluster algebras, tracing their origins in representation theory and highlighting recent developments that connect cluster structures with crystal operators. Along the way, we will explore some of the rich structures and features inherent in cluster algebras.",
         "local_global_conjectures_summary": "The local-global principle in modular representation theory asserts that the invariants of blocks of finite groups are determined by the invariants (of blocks) of local subgroups. There are several outstanding conjectures revolving around this principle. Alperin's block-wise weight conjecture (1987) predicts that the number of simple modules of a block is equal to the number of its weights. The finiteness conjectures of Donovan (1980) and Puig (1982) state that there are only finitely many blocks of finite groups with a given defect group, up to Morita and splendid Morita equivalence, respectively."
-    }
+    },
+    "search": "Axtarış"
 }

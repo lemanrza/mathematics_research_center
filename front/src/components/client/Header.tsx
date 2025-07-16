@@ -333,7 +333,7 @@ export default function Header() {
                             onClick={handleLinkClick}
                             className="py-2 hover:text-gray-300 transition-colors duration-200"
                         >
-                            Ana səhifə
+                            {t("ana_sehife")}
                         </Link>
 
                         <div className="border-b border-white/10 pb-2">
@@ -358,7 +358,7 @@ export default function Header() {
                                         onClick={handleLinkClick}
                                         className="block py-1 text-gray-300 hover:text-white text-xs transition-colors duration-200"
                                     >
-                                       {t("xos-gelmisiniz")}
+                                       {t("xos_gelmisiniz")}
                                     </Link>
                                     <Link
                                         to="/haqqimizda/merkezin-missiyasi"
@@ -408,7 +408,7 @@ export default function Header() {
                                 }}
                                 className="flex items-center justify-between w-full py-2 hover:text-gray-300 transition-colors duration-200"
                             >
-                                elmi_fealiyyet{t("")}
+                                {t("elmi_fealiyyet")}
                                 <ChevronDown
                                     size={16}
                                     className={`transition-transform duration-200 ${isElmiFealiyyetOpen ? 'rotate-180' : ''

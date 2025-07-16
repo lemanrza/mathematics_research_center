@@ -8,6 +8,7 @@ import { getAll } from '@/services/commonRequest';
 import { Endpoints } from '@/enums/endpoints';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
+import { t } from 'i18next';
 
 const AnnouncementsSection: React.FC = () => {
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
@@ -109,14 +110,14 @@ const AnnouncementsSection: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex flex-col sm:flex-row items-center justify-between mb-8">
-        <h1 className="text-4xl font-light text-gray-500 tracking-wide mb-4 sm:mb-0">ELANLAR</h1>
+        <h1 className="text-4xl font-light text-gray-500 tracking-wide uppercase mb-4 sm:mb-0">{t("elanlar")}</h1>
         <div className="flex items-center space-x-4 w-full sm:w-auto">
           <div className="relative w-full sm:w-[280px]">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
-              placeholder="Axtarış"
+              placeholder={t("search")}
               className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0D1F4F] focus:border-transparent w-full"
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -126,13 +127,13 @@ const AnnouncementsSection: React.FC = () => {
 
 
       <div className="mb-8">
-        <Button onClick={handleResetFilters} className="bg-[#0D1F4F] text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
-          BÜTÜN ELANLAR
+        <Button onClick={handleResetFilters} className="bg-[#0D1F4F] uppercase text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
+          {t("butun_elanlar")}
         </Button>
       </div>
 
-      <div className="flex flex-col lg:flex-row md:flex-row gap-3 items-center justify-between mb-6">
-        <h2 className="text-2xl font-medium text-gray-800">BÜTÜN ELANLAR</h2>
+      <div className="flex flex-col lg:flex-row md:flex-row gap-3 items-center uppercase justify-between mb-6">
+        <h2 className="text-2xl font-medium text-gray-800">{t("butun_elanlar")}</h2>
         <div>
           <Popover>
             <PopoverTrigger asChild>
@@ -142,13 +143,13 @@ const AnnouncementsSection: React.FC = () => {
                 className="data-[empty=true]:text-muted-foreground w-[280px] justify-start text-left font-normal"
               >
                 <CalendarIcon />
-                {date ? format(date, "PPP") : <span>Tarix seçin</span>}
+                {date ? format(date, "PPP") : <span>{t("tarix_secin")}</span>}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">
               <Calendar
                 mode="single"
-                selected={date ?? undefined} // This ensures `null` is handled as `undefined`
+                selected={date ?? undefined} 
                 onSelect={handleDateChange}
               />
             </PopoverContent>
@@ -159,7 +160,7 @@ const AnnouncementsSection: React.FC = () => {
       {/* No News Message */}
       {noNewsOnSelectedDate && (
         <div className="text-center text-red-500 font-medium mb-4">
-          Bu tarixdə xəbər yoxdur.
+          {t("tarixde_xeber_yoxdur")}
         </div>
       )}
 
@@ -205,7 +206,7 @@ const AnnouncementsSection: React.FC = () => {
             onClick={loadMoreSeminars}
             className="bg-[#0D1F4F] text-white px-8 py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-200"
           >
-            Daha çox yüklə
+           {t("daha_cox_yukle")}
           </button>
         </div>
       )}
