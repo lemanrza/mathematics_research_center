@@ -1,7 +1,6 @@
 import { Endpoints } from "@/enums/endpoints";
 
-// export const API_BASE_URL: string = "https://mathematics-research-center.onrender.com/";
-export const API_BASE_URL: string = "http://localhost:3000";
+export const API_BASE_URL: string = "https://mathematics-research-center-1.onrender.com/";
 
 
 type endpointType = {
