@@ -9,7 +9,7 @@ const Team: React.FC = () => {
     {
       name: 'Olcay Coşkun',
       role: t('Rehber'),
-      email: 'olcay.coshkun@bsu.edu.az',
+      email: 'olcay.coshkun@asoiu.edu.az',
       researchInterests:
         t('Sonlu qrupların təsvir nəzəriyyəsi, Mackey funksiyaları, (lifli) biset funksiyaları, kateqoriya cəbrləri, "Green Biset" funksiyaları, blok nəzəriyyəsi, birləşmə sistemləri, homoloji cəbr'),
       imageUrl: 'https://bdu.info.az/storage/52193/conversions/IMG_0294-thumb.jpg',
@@ -26,7 +26,7 @@ const Team: React.FC = () => {
     {
       name: 'Ertan Elma',
       role: t('Tədqiqatçı'),
-      email: 'ertan.elma@bsu.edu.az',
+      email: 'ertan.elma@asoiu.edu.az',
       researchInterests:
         t('Analitik və Elementar ədədlər nəzəriyyəsi, L-funksiyaları, Ələk üsulları və onların tətbiqi, Eksponensial cəbrlər və dairə metodu, Ədədlər nəzəriyyəsində ehtimal nəticələri, funksiyan sahələrində ədədlər nəzəriyyəsi'),
       imageUrl: 'https://bdu.info.az/storage/52194/conversions/ertanelma1-thumb.jpg',

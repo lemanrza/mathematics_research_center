@@ -1,31 +1,13 @@
 import { useTranslation } from 'react-i18next';
 
-const councilMembers = [
-  {
-    name: 'Azer Abizade',
-    title: 'ADA Universiteti və Elm və Təhsil Nazirliyi',
-  },
-  {
-    name: 'Olcay Coşkun',
-    title: 'MRL Müdiri',
-  },
-  {
-    name: 'Burak Gürel',
-    title: 'Boğaziçi Universiteti, Riyaziyyat Professoru',
-  },
-  {
-    name: 'Ergün Yalçın',
-    title: 'Bilkent Universiteti, Riyaziyyat Professoru',
-  },
-  {
-    name: 'Ferhad Huseynov',
-    title: 'ADA Universiteti',
-  },
-];
+
 
 const ScientificAdvisory = () => {
   const { t } = useTranslation();
-
+  const members = t('councilMembers', { returnObjects: true }) as {
+    name: string;
+    title: string;
+  }[];
   return (
     <div className="p-10 bg-white text-gray-800">
       {/* Subtitle */}
@@ -35,7 +17,7 @@ const ScientificAdvisory = () => {
 
       {/* Grid Layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {councilMembers.map((member, index) => (
+        {members.map((member, index) => (
           <div
             key={index}
             className="bg-gray-100 p-6 rounded shadow-sm"

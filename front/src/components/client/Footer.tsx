@@ -24,9 +24,6 @@ export default function Footer() {
             alt="Mathematics Research Center"
             className="w-60 h-auto mb-3"
           />
-          <p className="text-sm font-medium">
-            {t("BDU, əsas bina, 3-cü mərtəbə, Rəqəmsal Araşdırmalar Lab.")}
-          </p>
           <p className="text-sm mt-1">{t("Z. Xəlilov küçəsi, 33, AZ1148")}</p>
         </div>
 

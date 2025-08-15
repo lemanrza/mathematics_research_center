@@ -13,7 +13,6 @@ interface ResearchProgramSection {
 const ResearchPrograms = () => {
   const { t } = useTranslation();
 
-  // `t` metodunun nəticəsini `any` tipində qəbul edirik və sonra doğru tipe çeviririk
   const researchPrograms = t('research_programs', { returnObjects: true }) as ResearchProgramSection[];
 
   return (

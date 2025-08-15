@@ -13,8 +13,8 @@ const Connection = () => {
         </p>
         <p>
           <span className="font-semibold italic">{t("Mail ünvanı: ")}</span> 
-          <a href="mailto:mrl@bsu.edu.az" className="text-[#1e3a8a] hover:text-[#0b1123] transition-colors duration-300">
-            mrl@bsu.edu.az
+          <a href="mailto:mrl@asoiu.edu.az" className="text-[#1e3a8a] hover:text-[#0b1123] transition-colors duration-300">
+            mrl@asoiu.edu.az
           </a>
         </p>
         <p>

@@ -45,9 +45,6 @@ const ResearchResults = () => {
             </a>
           </li>
           <li className="text-base font-medium">
-            {t('research_results.research_4')}
-          </li>
-          <li className="text-base font-medium">
             {t('research_results.research_5')}
             <a
               href="https://arxiv.org/abs/2503.02766"

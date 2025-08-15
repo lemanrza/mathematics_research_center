@@ -158,13 +158,6 @@ export default function Header() {
                                             >
                                                 {t("Ziyarətçilər")}
                                             </Link>
-                                            <Link
-                                                to="/haqqimizda/muraciet"
-                                                onClick={handleLinkClick}
-                                                className="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-all duration-200"
-                                            >
-                                                {t("Müraciət")}
-                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -358,14 +351,14 @@ export default function Header() {
                                         onClick={handleLinkClick}
                                         className="block py-1 text-gray-300 hover:text-white text-xs transition-colors duration-200"
                                     >
-                                       {t("xos_gelmisiniz")}
+                                        {t("xos_gelmisiniz")}
                                     </Link>
                                     <Link
                                         to="/haqqimizda/merkezin-missiyasi"
                                         onClick={handleLinkClick}
                                         className="block py-1 text-gray-300 hover:text-white text-xs transition-colors duration-200"
                                     >
-                                       {t("merkezin_missiyasi")}
+                                        {t("merkezin_missiyasi")}
                                     </Link>
                                     <Link
                                         to="/haqqimizda/elmi-meslehet-surasi"
@@ -387,13 +380,6 @@ export default function Header() {
                                         className="block py-1 text-gray-300 hover:text-white text-xs transition-colors duration-200"
                                     >
                                         {t("Ziyarətçilər")}
-                                    </Link>
-                                    <Link
-                                        to="/haqqimizda/muraciet"
-                                        onClick={handleLinkClick}
-                                        className="block py-1 text-gray-300 hover:text-white text-xs transition-colors duration-200"
-                                    >
-                                        {t("Müraciət")}
                                     </Link>
                                 </div>
                             )}

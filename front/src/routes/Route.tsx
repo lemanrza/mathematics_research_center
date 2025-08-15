@@ -15,7 +15,6 @@ import CenterMission from "../pages/client/CenterMission";
 import SceintificAdvisory from "../pages/client/SceintificAdvisory";
 import Colleagues from "../pages/client/Colleagues";
 import Visitors from "../pages/client/Visitors";
-import Appeal from "../pages/client/Appeal";
 import ResearchGroup from "../pages/client/ResearchGroup";
 import ResearchPrograms from "../pages/client/ResearchPrograms";
 import AllEvents from "../pages/client/AllEvents";
@@ -104,10 +103,6 @@ const ROUTES: RouteObject[] = [
           {
             path: "ziyaretciler",
             element: <Visitors />,
-          },
-          {
-            path: "muraciet",
-            element: <Appeal />,
           }
         ],
       },
